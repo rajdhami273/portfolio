@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        overflow: hidden;
+      }
+      #contact {
+        a {
+          transition: transform 0.3s ease-in-out;
+        }
+        a:hover {
+          transform: scale(1.1);
+        }
+      }
+      section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        scroll-snap-align: start;
+      }
+      .snap-container {
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: 100vh;
+        scroll-behavior: smooth;
+      }
+      #projects-container {
+        scroll-snap-type: x mandatory;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+      }
+      .card-custom {
+        height: 100%;
+        img {
+          height: 50%;
+          width: 50%;
+          align-self: center;
+          margin-top: 20px;
+          object-fit: contain;
+        }
+      }
+      /* Sidebar styles for small screens */
+      @media (max-width: 991px) {
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: -250px;
+          width: 250px;
+          height: 100%;
+          padding-top: 60px;
+          transition: 0.3s;
+          z-index: 9998;
+        }
+        .sidebar a {
+          padding: 10px 20px;
+          text-decoration: none;
+          font-size: 18px;
+          color: white;
+          display: block;
+          transition: 0.3s;
+          opacity: 0.6;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+          opacity: 1;
+        }
+        .sidebar.active {
+          left: 0;
+        }
+        .menu-btn {
+          position: fixed;
+          top: 15px;
+          left: 15px;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          z-index: 9999;
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="snap-container" id="snap-container">
+      <!-- Sidebar for small screens -->
+      <button class="menu-btn bg-dark text-center" onclick="toggleSidebar()">
+        <span class="text-white fs-4" id="menu-btn">&#8942;</span>
+      </button>
+      <div id="sidebar" class="sidebar bg-dark">
+        <a href="#home" class="nav-link" onclick="toggleSidebar()">Home</a>
+        <a href="#about" class="nav-link" onclick="toggleSidebar()">About</a>
+        <a href="#projects" class="nav-link" onclick="toggleSidebar()"
+          >Projects</a
+        >
+        <a href="#resume" class="nav-link" onclick="toggleSidebar()">Resume</a>
+        <a href="#contact" class="nav-link" onclick="toggleSidebar()"
+          >Contact</a
+        >
+      </div>
+
+      <!-- Navbar for larger screens -->
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-none d-lg-block"
+      >
+        <div class="container">
+          <div class="collapse navbar-collapse w-100" id="navbarNav">
+            <ul class="navbar-nav m-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#projects">Projects</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#resume">Resume</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sections with snap scroll -->
+      <section id="home" class="bg-primary text-white">
+        <div class="container text-center">
+          <h1>Hi, I am Rajendra Dhami.</h1>
+          <p>
+            SDE2 @
+            <a target="_blank" class="text-white" href="https://www.apollo.io/"
+              >Apollo.io</a
+            >
+            | Tutor @
+            <a
+              target="_blank"
+              class="text-white"
+              href="https://getsdeready.com/"
+              >GetSDEReady</a
+            >
+          </p>
+          <p class="d-flex gap-2 justify-content-center">
+            <a href="#projects" class="btn btn-light">View my work</a>
+            <a href="#contact" class="btn btn-light">Reach out</a>
+          </p>
+        </div>
+      </section>
+
+      <section id="about" class="bg-light">
+        <div class="container text-center">
+          <h2>About Me</h2>
+          I am a
+          <b>Full stack web and mobile apps developer</b> with
+          <span id="total-experience"></span> years of experience.
+
+          <div className="desc-text">
+            Currently working at
+            <a href="http://www.apollo.io/" target="_blank" class="text-link">
+              <b>Apollo.io</b>.
+            </a>
+          </div>
+          <br />
+          <div class="desc-text">
+            What do I do apart from work?
+            <p>
+              <b>
+                In love with anything related to soccer and playing guitar.
+              </b>
+            </p>
+          </div>
+          <div class="desc-text">
+            My motivation quote?
+            <br />
+            <q class="blockquote">
+              Only way to stay hungry and motivated is to assume that you know
+              nothing about it, no matter how far you have come.
+            </q>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="container text-center">
+          <h2>Projects</h2>
+          <div class="overflow-auto mt-4">
+            <div id="projects-container" class="d-flex gap-4"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resume" class="bg-light">
+        <div class="container text-center">
+          <h2>Resume</h2>
+          <a
+            target="_blank"
+            href="https://drive.google.com/file/d/1ibALikAXvNKSZzfdtEaAHHKZcnMEWjGv/view?usp=sharing"
+            class="btn btn-link"
+          >
+            View my resume
+          </a>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container text-center">
+          <h2>Contact Me</h2>
+          <div class="d-flex gap-4 justify-content-center m-4">
+            <a href="mailto:rajdhami273@gmail.com" target="_blank">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="52 42 88 66"
+              >
+                <path
+                  fill="#4285f4"
+                  d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"
+                />
+                <path
+                  fill="#34a853"
+                  d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"
+                />
+                <path
+                  fill="#fbbc04"
+                  d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"
+                />
+                <path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92" />
+                <path
+                  fill="#c5221f"
+                  d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rajendra-dhami"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="30"
+                viewBox="0 0 72 72"
+                width="30"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path
+                    d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z"
+                    fill="#007EBB"
+                  />
+                  <path
+                    d="M62,62 L51.315625,62 L51.315625,43.8021149 C51.315625,38.8127542 49.4197917,36.0245323 45.4707031,36.0245323 C41.1746094,36.0245323 38.9300781,38.9261103 38.9300781,43.8021149 L38.9300781,62 L28.6333333,62 L28.6333333,27.3333333 L38.9300781,27.3333333 L38.9300781,32.0029283 C38.9300781,32.0029283 42.0260417,26.2742151 49.3825521,26.2742151 C56.7356771,26.2742151 62,30.7644705 62,40.051212 L62,62 Z M16.349349,22.7940133 C12.8420573,22.7940133 10,19.9296567 10,16.3970067 C10,12.8643566 12.8420573,10 16.349349,10 C19.8566406,10 22.6970052,12.8643566 22.6970052,16.3970067 C22.6970052,19.9296567 19.8566406,22.7940133 16.349349,22.7940133 Z M11.0325521,62 L21.769401,62 L21.769401,27.3333333 L11.0325521,27.3333333 L11.0325521,62 Z"
+                    fill="#FFF"
+                  />
+                </g>
+              </svg>
+            </a>
+            <a href="https://topmate.io/rajendradhami/" target="_blank">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 47 46"
+                fill="none"
+              >
+                <circle
+                  r="22.5"
+                  transform="matrix(1 0 0 -1 23.6152 23)"
+                  fill="#E44332"
+                  stroke="#E44332"
+                />
+                <path
+                  d="M33.0038 29.6411C31.5707 31.6672 29.5206 33.1752 27.1598 33.9401C24.7989 34.705 22.254 34.6857 19.905 33.8851C17.5561 33.0844 15.5291 31.5454 14.1269 29.4978C12.7247 27.4503 12.0225 25.0041 12.1251 22.5246C12.2277 20.045 13.1296 17.6652 14.6962 15.7405C16.2627 13.8158 18.4099 12.4495 20.817 11.8456C23.224 11.2418 25.7619 11.4328 28.0515 12.3901C30.341 13.3474 32.2595 15.0197 33.5204 17.1572L23.6152 23L33.0038 29.6411Z"
+                  fill="#FEF7F7"
+                />
+              </svg>
+            </a>
+            <a href="https://medium.com/@raazthemystery273" target="_blank">
+              <svg
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:svg="http://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 160 126.66667"
+                height="30"
+                width="30"
+                xml:space="preserve"
+                version="1.1"
+                id="svg2"
+              >
+                <metadata id="metadata8">
+                  <rdf:RDF
+                    ><cc:Work rdf:about=""
+                      ><dc:format>image/svg+xml</dc:format
+                      ><dc:type
+                        rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work
+                  ></rdf:RDF>
+                </metadata>
+                <defs id="defs6" />
+                <g
+                  transform="matrix(1.3333333,0,0,-1.3333333,0,126.66667)"
+                  id="g10"
+                >
+                  <g transform="scale(0.1)" id="g12">
+                    <path
+                      id="path14"
+                      style="
+                        fill: #231f20;
+                        fill-opacity: 1;
+                        fill-rule: nonzero;
+                        stroke: none;
+                      "
+                      d="m 1200,810 -47.46,0 C 1134.92,810 1110,784.582 1110,768.309 l 0,-589.809 c 0,-16.293 24.92,-38.5 42.54,-38.5 l 47.46,0 0,-140 -430,0 0,140 90,0 0,620 -4.41,0 L 645.422,0 482.707,0 275.25,760 270,760 270,140 360,140 360,0 0,0 0,140 46.0977,140 C 65.082,140 90,162.207 90,178.5 l 0,589.809 C 90,784.582 65.082,810 46.0977,810 L 0,810 l 0,140 450.164,0 147.797,-550 4.066,0 149.164,550 448.809,0 0,-140"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/rajdhami273" target="_blank">
+              <img style="height: 30px" src="instagram.svg" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const menuBtn = document.getElementById("menu-btn");
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          menuBtn.innerHTML = "&times;";
+        } else {
+          menuBtn.innerHTML = "&#8942;";
+        }
+      }
+      const exp = document.getElementById("total-experience");
+      function getYearDifference(dateString) {
+        const pastDate = new Date(dateString); // Convert "DD-MM-YYYY" to "YYYY-MM-DD"
+        const currentDate = new Date();
+
+        const diffInMilliseconds = currentDate - pastDate;
+        const diffInYears = diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25); // Account for leap years
+
+        return diffInYears.toFixed(1);
+      }
+      exp.innerText = getYearDifference("2019-06-05");
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+        const sideNavLinks = document.querySelectorAll("#sidebar a");
+
+        function activateNavLink(ev) {
+          const scrollPosition = ev.target.scrollTop;
+          sections.forEach((section) => {
+            if (
+              scrollPosition >= section.offsetTop - 100 &&
+              scrollPosition < section.offsetTop + section.offsetHeight
+            ) {
+              let sectionId = section.getAttribute("id");
+              navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${sectionId}`) {
+                  link.classList.add("active");
+                }
+              });
+              sideNavLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${sectionId}`) {
+                  link.classList.add("active");
+                }
+              });
+            }
+          });
+        }
+
+        document
+          .getElementById("snap-container")
+          .addEventListener("scroll", activateNavLink);
+      });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="portfolio.js"></script>
+  </body>
+</html>
