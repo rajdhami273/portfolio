@@ -15,7 +15,44 @@
       body {
         overflow: hidden;
       }
-      #contact {
+      #home {
+        background-color: #94a3a7;
+        background-image: radial-gradient(
+          /* to bottom right, */ #94a3a7 0%,
+          #777 74%
+        );
+        animation: ripple 3s linear infinite;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      @keyframes ripple {
+        0% {
+          background-size: 100% 100%;
+        }
+        50% {
+          background-size: 200% 200%;
+        }
+        100% {
+          background-size: 100% 100%;
+        }
+      }
+      .img-container {
+        height: 200px;
+        width: 200px;
+        overflow: hidden;
+        margin: auto;
+        transition: all 0.5s ease-in-out;
+        img {
+          height: 100%;
+          align-self: center;
+          box-shadow: 0px 20px 0px 0px rgb(0, 0, 0, 0.3);
+        }
+      }
+      .img-container:hover {
+        transform: scale(1.1);
+      }
+      #contact,
+      #resume {
         a {
           transition: transform 0.3s ease-in-out;
         }
@@ -51,6 +88,18 @@
           object-fit: contain;
         }
       }
+      .sidebar,
+      .menu-btn {
+        display: none;
+      }
+      .backdrop {
+        display: none;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(0, 0, 0, 0.3);
+        z-index: 9997;
+      }
       /* Sidebar styles for small screens */
       @media (max-width: 991px) {
         .sidebar {
@@ -62,6 +111,7 @@
           padding-top: 60px;
           transition: 0.3s;
           z-index: 9998;
+          display: block;
         }
         .sidebar a {
           padding: 10px 20px;
@@ -74,6 +124,7 @@
         }
         .sidebar a:hover,
         .sidebar a.active {
+          color: white;
           opacity: 1;
         }
         .sidebar.active {
@@ -90,6 +141,10 @@
           cursor: pointer;
           z-index: 9999;
           transform: rotate(90deg);
+          display: block;
+        }
+        .backdrop.active {
+          display: block;
         }
       }
     </style>
@@ -101,7 +156,9 @@
         <span class="text-white fs-4" id="menu-btn">&#8942;</span>
       </button>
       <div id="sidebar" class="sidebar bg-dark">
-        <a href="#home" class="nav-link" onclick="toggleSidebar()">Home</a>
+        <a href="#home" class="nav-link active" onclick="toggleSidebar()"
+          >Home</a
+        >
         <a href="#about" class="nav-link" onclick="toggleSidebar()">About</a>
         <a href="#projects" class="nav-link" onclick="toggleSidebar()"
           >Projects</a
@@ -111,11 +168,10 @@
           >Contact</a
         >
       </div>
+      <div id="backdrop" class="backdrop" onclick="toggleSidebar()"></div>
 
       <!-- Navbar for larger screens -->
-      <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-none d-lg-block"
-      >
+      <nav class="navbar navbar-expand-lg fixed-top d-none d-lg-block">
         <div class="container">
           <div class="collapse navbar-collapse w-100" id="navbarNav">
             <ul class="navbar-nav m-auto">
@@ -140,9 +196,28 @@
       </nav>
 
       <!-- Sections with snap scroll -->
-      <section id="home" class="bg-primary text-white">
+      <section id="home" class="text-white">
         <div class="container text-center">
-          <h1>Hi, I am Rajendra Dhami.</h1>
+          <div class="img-container mb-4"><img src="raj_p.png" /></div>
+          <h1
+            class="d-flex justify-content-center align-items-center flex-wrap gap-3"
+          >
+            Hi, I am Rajendra Dhami.
+            <button class="btn btn-outline-light" onclick="speak()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-megaphone"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-.214c-2.162-1.241-4.49-1.843-6.912-2.083l.405 2.712A1 1 0 0 1 5.51 15.1h-.548a1 1 0 0 1-.916-.599l-1.85-3.49-.202-.003A2.014 2.014 0 0 1 0 9V7a2.02 2.02 0 0 1 1.992-2.013 75 75 0 0 0 2.483-.075c3.043-.154 6.148-.849 8.525-2.199zm1 0v11a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0m-1 1.35c-2.344 1.205-5.209 1.842-8 2.033v4.233q.27.015.537.036c2.568.189 5.093.744 7.463 1.993zm-9 6.215v-4.13a95 95 0 0 1-1.992.052A1.02 1.02 0 0 0 1 7v2c0 .55.448 1.002 1.006 1.009A61 61 0 0 1 4 10.065m-.657.975 1.609 3.037.01.024h.548l-.002-.014-.443-2.966a68 68 0 0 0-1.722-.082z"
+                />
+              </svg>
+            </button>
+          </h1>
           <p>
             SDE2 @
             <a target="_blank" class="text-white" href="https://www.apollo.io/"
@@ -207,13 +282,12 @@
 
       <section id="resume" class="bg-light">
         <div class="container text-center">
-          <h2>Resume</h2>
           <a
             target="_blank"
             href="https://drive.google.com/file/d/1ibALikAXvNKSZzfdtEaAHHKZcnMEWjGv/view?usp=sharing"
-            class="btn btn-link"
+            class="btn btn-link text-dark"
           >
-            View my resume
+            <h2>Resume</h2>
           </a>
         </div>
       </section>
@@ -344,7 +418,9 @@
       function toggleSidebar() {
         const sidebar = document.getElementById("sidebar");
         const menuBtn = document.getElementById("menu-btn");
+        const backdrop = document.getElementById("backdrop");
         sidebar.classList.toggle("active");
+        backdrop.classList.toggle("active");
         if (sidebar.classList.contains("active")) {
           menuBtn.innerHTML = "&times;";
         } else {
@@ -400,5 +476,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="portfolio.js"></script>
+    <script src="speak.js"></script>
   </body>
 </html>

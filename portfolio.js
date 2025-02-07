@@ -4,8 +4,16 @@ const projects = [
     summary: "Play with visualisers and learn",
     image: "visualisers.png",
     link: "https://rajdhami273.github.io/visualisers/",
-    bgColor:
-      "linear-gradient(315deg, #2d3436 0%, #000000 74%)",
+    bgColor: "linear-gradient(315deg, #2d3436 0%, #000000 74%)",
+  },
+  {
+    heading: "Globiliti",
+    summary:
+      "Where schools innovate their future - together with help of innovators",
+    image:
+      "https://goglobiliti.com/assets/landing-page/main/globiliti-logo2x.png",
+    link: "https://goglobiliti.com/",
+    bgColor: "linear-gradient(315deg, #2d3436 0%, #777 74%)",
   },
   {
     heading: "Zero Jhanjhat for Tenants",
