@@ -3,153 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rajendra Dhami's Portfolio" />
     <title>Rajendra | Portfolio</title>
+
+    <!-- Resource hints -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="preload" href="raj_p.png" as="image" />
+
     <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        overflow: hidden;
-      }
-      #home {
-        background-color: #94a3a7;
-        background-image: radial-gradient(
-          /* to bottom right, */ #94a3a7 0%,
-          #777 74%
-        );
-        animation: ripple 3s linear infinite;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-      @keyframes ripple {
-        0% {
-          background-size: 100% 100%;
-        }
-        50% {
-          background-size: 200% 200%;
-        }
-        100% {
-          background-size: 100% 100%;
-        }
-      }
-      .img-container {
-        height: 200px;
-        width: 200px;
-        overflow: hidden;
-        margin: auto;
-        transition: all 0.5s ease-in-out;
-        img {
-          height: 100%;
-          align-self: center;
-          box-shadow: 0px 20px 0px 0px rgb(0, 0, 0, 0.3);
-        }
-      }
-      .img-container:hover {
-        transform: scale(1.1);
-      }
-      #contact,
-      #resume {
-        a {
-          transition: transform 0.3s ease-in-out;
-        }
-        a:hover {
-          transform: scale(1.1);
-        }
-      }
-      section {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        scroll-snap-align: start;
-      }
-      .snap-container {
-        scroll-snap-type: y mandatory;
-        overflow-y: scroll;
-        height: 100vh;
-        scroll-behavior: smooth;
-      }
-      #projects-container {
-        scroll-snap-type: x mandatory;
-        overflow-y: scroll;
-        scroll-behavior: smooth;
-      }
-      .card-custom {
-        height: 100%;
-        img {
-          height: 50%;
-          width: 50%;
-          align-self: center;
-          margin-top: 20px;
-          object-fit: contain;
-        }
-      }
-      .sidebar,
-      .menu-btn {
-        display: none;
-      }
-      .backdrop {
-        display: none;
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        background-color: rgb(0, 0, 0, 0.3);
-        z-index: 9997;
-      }
-      /* Sidebar styles for small screens */
-      @media (max-width: 991px) {
-        .sidebar {
-          position: fixed;
-          top: 0;
-          left: -250px;
-          width: 250px;
-          height: 100%;
-          padding-top: 60px;
-          transition: 0.3s;
-          z-index: 9998;
-          display: block;
-        }
-        .sidebar a {
-          padding: 10px 20px;
-          text-decoration: none;
-          font-size: 18px;
-          color: white;
-          display: block;
-          transition: 0.3s;
-          opacity: 0.6;
-        }
-        .sidebar a:hover,
-        .sidebar a.active {
-          color: white;
-          opacity: 1;
-        }
-        .sidebar.active {
-          left: 0;
-        }
-        .menu-btn {
-          position: fixed;
-          top: 15px;
-          left: 15px;
-          height: 40px;
-          width: 40px;
-          border-radius: 50%;
-          border: none;
-          cursor: pointer;
-          z-index: 9999;
-          transform: rotate(90deg);
-          display: block;
-        }
-        .backdrop.active {
-          display: block;
-        }
-      }
-    </style>
-    <!-- Google tag (gtag.js) -->
+
+    <!-- Google Analytics with async -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-H0XB3VT0RW"
@@ -160,7 +32,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-H0XB3VT0RW");
     </script>
   </head>
@@ -213,7 +84,9 @@
       <!-- Sections with snap scroll -->
       <section id="home" class="text-white">
         <div class="container text-center">
-          <div class="img-container mb-4"><img src="raj_p.png" /></div>
+          <div class="img-container mb-4">
+            <img alt="Rajendra Dhami" src="raj_p.png" loading="eager" />
+          </div>
           <h1
             class="d-flex justify-content-center align-items-center flex-wrap gap-3"
           >
@@ -422,7 +295,14 @@
               </svg>
             </a>
             <a href="https://www.instagram.com/rajdhami273" target="_blank">
-              <img style="height: 30px" src="instagram.svg" />
+              <img
+                style="height: 30px"
+                src="instagram.svg"
+                alt="Instagram"
+                width="30"
+                height="30"
+                loading="lazy"
+              />
             </a>
           </div>
         </div>
@@ -489,8 +369,12 @@
       });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="portfolio.js"></script>
-    <script src="speak.js"></script>
+    <!-- Defer non-critical scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <script src="portfolio.js" defer></script>
+    <script src="speak.js" defer></script>
   </body>
 </html>
